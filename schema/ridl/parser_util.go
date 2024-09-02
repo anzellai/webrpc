@@ -2,7 +2,6 @@ package ridl
 
 import (
 	"errors"
-	"fmt"
 )
 
 func expectWord(tok *token, value string) error {
@@ -48,7 +47,8 @@ func unescapeString(in string) (string, error) {
 				case '"':
 					out = out + string(n)
 				default:
-					return "", fmt.Errorf("unexpected character %q after backslash", c)
+					out = out + "\\" + string(n)
+					// return "", fmt.Errorf("unexpected character %q after backslash", c)
 				}
 			} else {
 				return "", errors.New("unexpected end after backslash")
